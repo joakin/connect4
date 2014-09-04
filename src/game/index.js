@@ -71,3 +71,13 @@ function win(fourInline, game) {
   return won;
 }
 
+exports.print = function(g) {
+  console.log(' ', g.state, 'winner:', g.winner,
+              'line:', g.line && g.line.how, g.line && g.line.where.join(', '));
+  console.log(
+    g.board.cells.map(function(r) {
+      return [''].concat(r).concat(['']).join('|');
+    }).reverse().join('\n')
+  );
+  console.log(g);
+};

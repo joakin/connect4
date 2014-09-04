@@ -161,6 +161,16 @@ function win(fourInline, game) {
   return won;
 }
 
+exports.print = function(g) {
+  console.log(' ', g.state, 'winner:', g.winner,
+              'line:', g.line && g.line.how, g.line && g.line.where.join(', '));
+  console.log(
+    g.board.cells.map(function(r) {
+      return [''].concat(r).concat(['']).join('|');
+    }).reverse().join('\n')
+  );
+  console.log(g);
+};
 
 },{"../utils/clone":"/Users/jkn/dev/projects/connect4/src/utils/clone.js","./board":"/Users/jkn/dev/projects/connect4/src/game/board.js","./player":"/Users/jkn/dev/projects/connect4/src/game/player.js"}],"/Users/jkn/dev/projects/connect4/src/game/player.js":[function(require,module,exports){
 
@@ -177,7 +187,7 @@ var Connect4 = require('./game');
 console.log('Init game');
 var game = Connect4.init();
 
-console.log(game);
+Connect4.print(game);
 
 var started = Connect4.start('John', 'Mary', game);
 
@@ -189,17 +199,15 @@ console.log(
   'as RED'
 );
 
-console.log('Game state', started.state);
+Connect4.print(started);
 
 console.log('Blue puts');
 
 var p = Connect4.play(3, started);
-console.log(p, p.state);
-console.log(printBoard(p));
+Connect4.print(p);
 
 p = Connect4.play(3, p);
-console.log(p, p.state);
-console.log(printBoard(p));
+Connect4.print(p);
 
 [0, 1, 2].forEach(function(m) {
   p = Connect4.play(m, p);
@@ -207,13 +215,8 @@ console.log(printBoard(p));
     p = Connect4.play(m, p);
 });
 
-console.log(p, p.state);
-printBoard(p);
+Connect4.print(p);
 
-
-function printBoard(g) {
-  console.log(g.board.cells.map(function(r) {return r.join('|');}).join('\n'));
-}
 
 
 },{"./game":"/Users/jkn/dev/projects/connect4/src/game/index.js"}],"/Users/jkn/dev/projects/connect4/src/utils/clone.js":[function(require,module,exports){

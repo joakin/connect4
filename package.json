@@ -1,0 +1,26 @@
+{
+  "name": "connect4",
+  "version": "0.0.0",
+  "description": "Connect Four Game",
+  "main": "index.js",
+  "author": "Joaquin Oltra",
+  "license": "MIT",
+  "browserify": {
+    "transform": [ "brfs" ]
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+    "brfs": "^1.1.1",
+    "tape": "^2.13.2",
+    "watch-run": "^1.0.0"
+  },
+  "scripts": {
+    "watch-js": "watchify src/index.js -o public/js/bundle.js --debug --verbose",
+    "build-js": "browserify src/index.js -o public/js/bundle.js",
+    "watch": "npm run watch-js",
+    "build": "npm run build-js",
+    "watch-test": "./node_modules/.bin/watch-run -p \"{src,test}/**/*.js\" npm test",
+    "test": "browserify test/*.js | testling"
+  }
+}

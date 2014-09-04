@@ -1,6 +1,6 @@
 
 var test = require('tape');
-var clone = require('../../src/utils/clone');
+var clone = require('../src/utils/clone');
 
 test('it clones an object', function(t) {
   var a = {a: 1, b: [2, 3]};

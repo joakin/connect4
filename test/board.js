@@ -1,5 +1,5 @@
 
-var Board = require('../../src/game/board');
+var Board = require('../src/game/board');
 var test = require('tape');
 
 test('exports a function that creates a board, with size and cells', function(t) {

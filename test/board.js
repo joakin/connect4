@@ -63,3 +63,10 @@ test('Can detect an upwards diagonal 4 in line', function(t) {
   t.end();
 });
 
+test('Can detect an downwards diagonal 4 in line', function(t) {
+  var b = Board(7);
+  for(var col = 0; col < 4; col++)
+    b = Board.set(3-col, col, Board.Chips.BLUE, b);
+  t.deepEqual(Board.hasFourInline(b), { how: 'DOWNDIAGONAL', where: [0, 0] });
+  t.end();
+});

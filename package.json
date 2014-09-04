@@ -21,6 +21,6 @@
     "watch": "npm run watch-js",
     "build": "npm run build-js",
     "watch-test": "./node_modules/.bin/watch-run -p \"{src,test}/**/*.js\" npm test",
-    "test": "browserify test/**/*.js | testling"
+    "test": "browserify test/*.js | testling"
   }
 }

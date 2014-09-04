@@ -32,3 +32,15 @@ Board.set = function(row, col, val, b) {
   return nb;
 };
 
+Board.put = function(col, val, b) {
+  var nb = clone(b);
+  for (var i = 0; i < nb.size; i++) {
+    var row = nb.cells[i];
+    if (row[col] === Board.Chips.EMPTY) {
+      row[col] = val;
+      return nb;
+    }
+  }
+  throw new Error('Column', col, 'is full in board', b);
+};
+

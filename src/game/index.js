@@ -37,6 +37,8 @@ exports.play = function(col, game) {
     throw new Error('You can only play when the game is running')
 
   var played = clone(game);
+  played.board = Board.put(col, Board.Chips[played.state], played.board);
+
   return switchTurn(played);
 };
 

@@ -42,3 +42,13 @@ test('Trying to play in invalid states does not work', function(t) {
   t.end();
 });
 
+test('After a BLUE movement, the chip is in its place', function(t) {
+  t.equal(Board.get(0, 3, played.board), Board.Chips.BLUE);
+  t.end();
+});
+test('After a RED movement, the chip O is in its place', function(t) {
+  t.equal(Board.get(0, 4, played2.board), Board.Chips.RED);
+  t.end();
+});
+
+

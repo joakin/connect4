@@ -22,7 +22,7 @@ console.log('Game state', started.state);
 
 console.log('Blue puts');
 
-var p = Connect4.play(Math.floor(Math.random()*8), started);
+var p = Connect4.play(Math.floor(Math.random()*7), started);
 console.log(p, p.state);
 
 p = Connect4.play(Math.floor(Math.random()*8), p);

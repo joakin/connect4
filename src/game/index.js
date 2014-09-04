@@ -39,11 +39,14 @@ exports.play = function(col, game) {
   var played = clone(game);
   played.board = Board.put(col, Board.Chips[played.state], played.board);
 
+  var fourInline = Board.hasFourInline(played.board);
+  if (fourInline) {
+    return win(fourInline, played);
+  }
+
   if (Board.isFull(played.board)) {
     return gameOver(played);
   }
-
-  // TODO: 4 in line
 
   return switchTurn(played);
 };
@@ -58,5 +61,13 @@ function gameOver(game) {
   var over = clone(game);
   over.state = States.GAMEOVER;
   return over;
+}
+
+function win(fourInline, game) {
+  var won = clone(game);
+  won.winner = game.state;
+  won.state = States.GAMEOVER;
+  won.line = fourInline;
+  return won;
 }
 

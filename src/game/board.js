@@ -51,3 +51,28 @@ Board.isFull = function(board) {
       if (row[j] === Board.Chips.EMPTY) return false;
   return true;
 };
+
+Board.hasFourInline = function(board) {
+  for (var i = 0; i < board.size - 4; i++) {
+    var row = board.cells[i];
+    for (var j = 0; j < board.size - 4; j++) {
+      // Check horizontals
+      if (row[i] !== Board.Chips.EMPTY &&
+          row[i] === row[i+1] &&
+          row[i] === row[i+2] &&
+          row[i] === row[i+3])
+        return { how: 'HORIZONTAL', where: [i, j] };
+
+      // Check vertical
+      var row1 = board.cells[i+1];
+      var row2 = board.cells[i+2];
+      var row3 = board.cells[i+3];
+      if (row[i] !== Board.Chips.EMPTY &&
+          row[i] === row1[i] &&
+          row[i] === row2[i] &&
+          row[i] === row3[i])
+        return { how: 'VERTICAL', where: [i, j] };
+    }
+  }
+  return null;
+};

@@ -53,13 +53,29 @@ test('After a RED movement, the chip O is in its place', function(t) {
 
 test('When the board is full, the game is over', function(t) {
   var g = started;
+  Board.Chips.BLUE = 1;
   for (var i = 0; i < g.board.size; i++)
     for (var j = 0; j < g.board.size; j++) {
-      g.state = Connect4.States.BLUE;
+      ++Board.Chips.BLUE; // Cheating to avoid 4 in line
+      g.state = Connect4.States.BLUE; // Cheating to avoid 4 in line
       g = Connect4.play(i, g);
     }
 
   t.equal(g.state, Connect4.States.GAMEOVER);
+  t.end();
+});
+
+test('When there is a 4 in line, game is over, and a winner is set', function(t) {
+  var g = started;
+  var moves = [0, 1, 2, 3];
+  moves.forEach(function(col) {
+    g = Connect4.play(col, g);
+    if (col !== 3)
+      g = Connect4.play(col, g);
+  });
+  t.equal(g.state, Connect4.States.GAMEOVER);
+  t.equal(g.winner, Connect4.States.BLUE);
+  t.equal(typeof g.line, "object");
   t.end();
 });
 

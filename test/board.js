@@ -38,3 +38,19 @@ test('Can detect if board is full', function(t) {
   t.equal(Board.isFull(Board.put(3, Board.Chips.BLUE, Board(7))), false);
   t.end();
 });
+
+test('Can not detect a horizontal 4 in line', function(t) {
+  var b = Board(7);
+  for(var col = 0; col < 3; col++)
+    b = Board.put(col, Board.Chips.BLUE, b);
+  t.equal(Board.hasFourInline(b), null);
+  t.end();
+});
+
+test('Can detect a horizontal 4 in line', function(t) {
+  var b = Board(7);
+  for(var col = 0; col < 4; col++)
+    b = Board.put(col, Board.Chips.BLUE, b);
+  t.deepEqual(Board.hasFourInline(b), { how: 'HORIZONTAL', where: [0, 0] });
+  t.end();
+});

@@ -30,6 +30,14 @@ p = Connect4.play(3, p);
 console.log(p, p.state);
 console.log(printBoard(p));
 
+[0, 1, 2].forEach(function(m) {
+  p = Connect4.play(m, p);
+  if (m !== 2)
+    p = Connect4.play(m, p);
+});
+
+console.log(p, p.state);
+printBoard(p);
 
 
 function printBoard(g) {

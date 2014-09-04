@@ -58,28 +58,31 @@ Board.hasFourInline = function(board) {
     for (var j = 0; j < board.size - 4; j++) {
 
       var val = row[i];
+      var diagval = board.cells[i+3][i];
       var canBe = true && val !== Board.Chips.EMPTY;
+      var diagCanBe = true && diagval !== Board.Chips.EMPTY;
 
       var horizontal = canBe;
       var vertical   = canBe;
       var updiag     = canBe;
-      var downdiag   = canBe;
+      var downdiag   = diagCanBe;
 
-      if (canBe) {
+      if (canBe || diagCanBe) {
         for (var k = 1; k < 4; k++) {
           horizontal = horizontal && val === row[i+k];
           vertical   = vertical   && val === board.cells[i+k][i];
           updiag     = updiag     && val === board.cells[i+k][i+k];
-          downdiag   = downdiag   && val === board.cells[i+4-k][i+k];
+          downdiag   = downdiag   && diagval === board.cells[i+3-k][i+k];
         }
 
         var how = null;
+        var where = [i, j];
         if (horizontal) how = 'HORIZONTAL';
         if (vertical)   how = 'VERTICAL';
         if (updiag)     how = 'UPDIAGONAL';
-        if (downdiag)   how = 'DOWNDIAGONAL';
+        if (downdiag) { how = 'DOWNDIAGONAL'; where = [i+3, j]; }
 
-        if (how) return { how: how, where: [i, j] };
+        if (how) return { how: how, where: where };
       }
     }
   }

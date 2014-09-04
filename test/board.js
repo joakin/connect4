@@ -12,3 +12,11 @@ test('exports a function that creates a board, with size and cells', function(t)
   });
   t.end();
 });
+
+test('Can put and get a cell in the board', function(t) {
+  var b = Board(7);
+  t.equal(Board.get(0, 3, b), Board.Chips.EMPTY);
+  var b2 = Board.set(0, 3, Board.Chips.BLUE, b);
+  t.equal(Board.get(0, 3, b2), Board.Chips.BLUE);
+  t.end();
+});

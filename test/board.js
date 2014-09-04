@@ -28,3 +28,13 @@ test('Can put chips by column', function(t) {
   t.equal(Board.get(1, 3, b2), Board.Chips.RED);
   t.end();
 });
+
+test('Can detect if board is full', function(t) {
+  var b = Board(7);
+  for(var row = 0; row < 7; row++)
+    for(var col = 0; col < 7; col++)
+      b = Board.put(col, Board.Chips.BLUE, b);
+  t.equal(Board.isFull(b), true);
+  t.equal(Board.isFull(Board.put(3, Board.Chips.BLUE, Board(7))), false);
+  t.end();
+});

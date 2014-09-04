@@ -44,3 +44,10 @@ Board.put = function(col, val, b) {
   throw new Error('Column', col, 'is full in board', b);
 };
 
+Board.isFull = function(board) {
+  var i, j, row;
+  for (i = 0; i < board.size; i++)
+    for (row = board.cells[i], j = 0; j < board.size; j++)
+      if (row[j] === Board.Chips.EMPTY) return false;
+  return true;
+};

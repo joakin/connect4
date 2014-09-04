@@ -22,9 +22,17 @@ console.log('Game state', started.state);
 
 console.log('Blue puts');
 
-var p = Connect4.play(Math.floor(Math.random()*7), started);
+var p = Connect4.play(3, started);
 console.log(p, p.state);
+console.log(printBoard(p));
 
-p = Connect4.play(Math.floor(Math.random()*8), p);
+p = Connect4.play(3, p);
 console.log(p, p.state);
+console.log(printBoard(p));
+
+
+
+function printBoard(g) {
+  console.log(g.board.cells.map(function(r) {return r.join('|');}).join('\n'));
+}
 

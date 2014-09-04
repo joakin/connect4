@@ -51,4 +51,15 @@ test('After a RED movement, the chip O is in its place', function(t) {
   t.end();
 });
 
+test('When the board is full, the game is over', function(t) {
+  var g = started;
+  for (var i = 0; i < g.board.size; i++)
+    for (var j = 0; j < g.board.size; j++) {
+      g.state = Connect4.States.BLUE;
+      g = Connect4.play(i, g);
+    }
+
+  t.equal(g.state, Connect4.States.GAMEOVER);
+  t.end();
+});
 

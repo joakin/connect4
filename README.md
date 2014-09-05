@@ -5,7 +5,7 @@ CONNECT 4
 ### Deps
 
 ```
-npm install -g browserify watchify
+npm install -g browserify watchify uglify-js
 npm install
 ```
 

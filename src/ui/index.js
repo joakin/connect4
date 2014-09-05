@@ -6,6 +6,7 @@ var Connect4 = require('../game');
 
 var Initial = require('./initial');
 var Game = require('./game');
+var GameOver = require('./game-over');
 
 exports.init = function(id) {
   domready(function() {
@@ -13,12 +14,14 @@ exports.init = function(id) {
     var dom = document.getElementById(id);
 
     var ui = {
+      id: id,
       dom: dom,
       game: Connect4.init(),
       events: delegate(dom),
       views: {
         initial: null,
-        game: null
+        game: null,
+        gameOver: null
       }
     };
 
@@ -35,19 +38,24 @@ function startGame(blue, red, ui) {
   }
 
   cleanScreen(ui);
-
   ui.views.game = Game.init(ui, userPlays);
 }
 
 function userPlays(row, col, ui) {
   ui.game = Connect4.play(col, ui.game);
   Game.render(ui.views.game, ui);
-  if (ui.game.state === Connect4.states.GAMEOVER)
+  if (ui.game.state === Connect4.States.GAMEOVER)
     gameFinished(ui);
 }
 
 function gameFinished(ui) {
-  // ui.dom.innerHTML = '
+  cleanScreen(ui);
+  ui.views.gameOver = GameOver.init(ui, restart);
+}
+
+function restart(ui) {
+  cleanScreen(ui);
+  exports.init(ui.id);
 }
 
 function cleanScreen(ui) {

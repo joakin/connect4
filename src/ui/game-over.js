@@ -15,7 +15,7 @@ GameOver.init = function(ui, restart) {
     winner: ui.dom.querySelector('.winner')
   };
 
-  screen.winner.textContent = Connect4.currentPlayer(ui.game);
+  screen.winner.textContent = Connect4.winner(ui.game);
 
   ui.events.on('click', '.restart', restart.bind(null, ui));
 

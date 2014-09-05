@@ -90,3 +90,17 @@ in the javascript files, to dom nodes).
 
 Plain css is used for the styles.
 
+TODO
+----
+
+Things I want to do (whatever happens):
+* [ ] UI tests
+* [ ] Fix mobile css (now with the zoom when using the keyboard it is funky
+  when starting the game)
+
+Awesome things to do (less important):
+* [ ] Undo redo (it already works with immutable data structures, so it should
+  be easy)
+* [ ] Better design and styles (it is extra simple now)
+* [ ] CSS transitions for a better GUI
+

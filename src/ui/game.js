@@ -1,12 +1,14 @@
 var domify = require('domify');
 var fs = require('fs');
 
+var Connect4 = require('../game');
+
 var Game = module.exports = {
   screen: domify(fs.readFileSync(__dirname+'/views/game.html', 'utf8'))
 };
 
 Game.init = function(ui, play) {
-  ui.dom.appendChild(ui.screens.game);
+  ui.dom.appendChild(Game.screen.cloneNode(true));
 
   var screen = {
     cell: ui.dom.querySelector('.cell'),

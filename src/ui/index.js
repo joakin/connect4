@@ -16,10 +16,6 @@ exports.init = function(id) {
       dom: dom,
       game: Connect4.init(),
       events: delegate(dom),
-      screens: {
-        initial: Initial.screen.cloneNode(true),
-        game: Game.screen.cloneNode(true)
-      },
       views: {
         initial: null,
         game: null

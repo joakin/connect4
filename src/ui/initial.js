@@ -6,7 +6,7 @@ var Initial = module.exports = {
 };
 
 Initial.init = function(ui, done) {
-  ui.dom.appendChild(ui.screens.initial);
+  ui.dom.appendChild(Initial.screen.cloneNode(true));
 
   var screen = {
     inputs: ui.dom.querySelectorAll('.playerNames input'),

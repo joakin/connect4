@@ -7,20 +7,24 @@ var Initial = module.exports = {
 
 Initial.init = function(ui, done) {
   ui.dom.appendChild(ui.screens.initial);
-  ui.events.on('click', '.playerNames button', setPlayers.bind(null, ui, done));
+
+  var screen = {
+    inputs: ui.dom.querySelectorAll('.playerNames input'),
+    msg: ui.dom.querySelector('.playerNames span.msg')
+  };
+
+  ui.events.on('click', '.playerNames button', setPlayers.bind(null, screen, ui, done));
 };
 
-function setPlayers(ui, done) {
-  var inputs = ui.dom.querySelectorAll('.playerNames input');
-  var msg = ui.dom.querySelector('.playerNames span.msg');
-  var blue = inputs[0].value;
-  var red = inputs[1].value;
+function setPlayers(screen, ui, done) {
+  var blue = screen.inputs[0].value;
+  var red = screen.inputs[1].value;
   if (!blue || !red) {
-    msg.textContent = 'Every player needs a name!';
+    screen.msg.textContent = 'Every player needs a name!';
     return;
   }
 
   var res = done(blue, red, ui);
   if (typeof res === 'string')
-    msg.textContent = res;
+    screen.msg.textContent = res;
 }

@@ -4,4 +4,14 @@ html { box-sizing: border-box; }
 
 .board { height: 500px; width: 500px; margin: 10px; overflow: hidden; }
 
-.cell { height: 14.28%; width: 14.28%; float: left; border: 1px solid #ddd; }
+.cell {
+  height: 14.28%;
+  width: 14.28%;
+  float: left;
+  border: 1px solid #ddd;
+  font-size: 58px;
+  line-height: 69px;
+  font-family: courier;
+  text-align: center;
+}
+

@@ -19,10 +19,14 @@ exports.init = function(id) {
       screens: {
         initial: Initial.screen.cloneNode(true),
         game: Game.screen.cloneNode(true)
+      },
+      views: {
+        initial: null,
+        game: null
       }
     };
 
-    Initial.init(ui, startGame);
+    ui.views.initial = Initial.init(ui, startGame);
 
   });
 }
@@ -36,14 +40,15 @@ function startGame(blue, red, ui) {
 
   cleanScreen(ui);
 
-  Game.init(ui, userPlays);
+  ui.views.game = Game.init(ui, userPlays);
+}
+
+function userPlays(row, col, ui) {
+  ui.game = Connect4.play(col, ui.game);
+  Game.render(ui.views.game, ui);
 }
 
 function cleanScreen(ui) {
   ui.dom.innerHTML = '';
-}
-
-function userPlays(row, col, ui) {
-  console.log('user: ', ui.game.state, 'plays col', col);
 }
 

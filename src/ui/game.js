@@ -14,7 +14,7 @@ Game.init = function(ui, play) {
     name: ui.dom.querySelector('.turn>span')
   };
 
-  Game.drawBoard(screen, ui.game.board);
+  Game.render(screen, ui);
 
   ui.events.on('click', '.cell', function(ev, cell) {
     var row = cell.dataset.row;
@@ -22,6 +22,7 @@ Game.init = function(ui, play) {
     play(row, col, ui);
   });
 
+  return screen;
 };
 
 Game.drawBoard = function(screen, board) {
@@ -33,7 +34,6 @@ Game.drawBoard = function(screen, board) {
 
   domBoard.reverse().forEach(function (row, i) {
     row.forEach(function (cell, j) {
-      cell.textContent = (board.size-i)+'-'+(j+1);
       screen.board.appendChild(cell);
     });
   });
@@ -43,6 +43,15 @@ function cellToDom(cellDom, row, cell, col) {
   var nc = cellDom.cloneNode(true);
   nc.dataset.row = row;
   nc.dataset.col = col;
+  nc.textContent = cell;
   return nc;
 }
+
+Game.drawTurn = function(screen, ui) {
+};
+
+Game.render = function(screen, ui) {
+  Game.drawTurn(screen, ui);
+  Game.drawBoard(screen, ui.game.board);
+};
 

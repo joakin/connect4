@@ -53,12 +53,12 @@ Board.isFull = function(board) {
 };
 
 Board.hasFourInline = function(board) {
-  for (var i = 0; i < board.size - 4; i++) {
-    var row = board.cells[i];
-    for (var j = 0; j < board.size - 4; j++) {
+  for (var rowIdx = 0; rowIdx <= board.size - 4; rowIdx++) {
+    var row = board.cells[rowIdx];
+    for (var colIdx = 0; colIdx <= board.size - 4; colIdx++) {
 
-      var val = row[i];
-      var diagval = board.cells[i+3][i];
+      var val = row[colIdx];
+      var diagval = board.cells[rowIdx+3][colIdx];
       var canBe = true && val !== Board.Chips.EMPTY;
       var diagCanBe = true && diagval !== Board.Chips.EMPTY;
 
@@ -69,18 +69,18 @@ Board.hasFourInline = function(board) {
 
       if (canBe || diagCanBe) {
         for (var k = 1; k < 4; k++) {
-          horizontal = horizontal && val === row[i+k];
-          vertical   = vertical   && val === board.cells[i+k][i];
-          updiag     = updiag     && val === board.cells[i+k][i+k];
-          downdiag   = downdiag   && diagval === board.cells[i+3-k][i+k];
+          horizontal = horizontal && val === row[colIdx+k];
+          vertical   = vertical   && val === board.cells[rowIdx+k][colIdx];
+          updiag     = updiag     && val === board.cells[rowIdx+k][colIdx+k];
+          downdiag   = downdiag   && diagval === board.cells[rowIdx+3-k][colIdx+k];
         }
 
         var how = null;
-        var where = [i, j];
+        var where = [rowIdx, colIdx];
         if (horizontal) how = 'HORIZONTAL';
         if (vertical)   how = 'VERTICAL';
         if (updiag)     how = 'UPDIAGONAL';
-        if (downdiag) { how = 'DOWNDIAGONAL'; where = [i+3, j]; }
+        if (downdiag) { how = 'DOWNDIAGONAL'; where = [rowIdx+3, colIdx]; }
 
         if (how) return { how: how, where: where };
       }

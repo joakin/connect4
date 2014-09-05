@@ -47,6 +47,16 @@ test('Can not detect a horizontal 4 in line', function(t) {
   t.end();
 });
 
+test('Can detect a horizontal 4 in line', function(t) {
+  for (var i = 0; i < 4; i++) {
+    var b = Board(7);
+    for(var col = 0; col < 4; col++)
+      b = Board.put(i + col, Board.Chips.BLUE, b);
+    t.deepEqual(Board.hasFourInline(b), { how: 'HORIZONTAL', where: [0, i] });
+  }
+  t.end();
+});
+
 test('Can detect a vertical 4 in line', function(t) {
   var b = Board(7);
   for(var col = 0; col < 4; col++)

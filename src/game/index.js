@@ -82,6 +82,19 @@ exports.print = function(g) {
   console.log(g);
 };
 
+function getPlayer(state, game) {
+  return game.players[state.toLowerCase()]
+}
+
 exports.currentPlayer = function(game) {
-  return game.players[game.state.toLowerCase()];
+  return getPlayer(game.state, game);
+};
+
+exports.winner = function(game) {
+  return getPlayer(game.winner, game);
+};
+
+exports.looser = function(game) {
+  var w = exports.winner(game);
+  return game.players.blue === w ? game.players.red : game.players.blue;
 };

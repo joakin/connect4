@@ -65,14 +65,16 @@ test('When the board is full, the game is over', function(t) {
   t.end();
 });
 
+var won = started;
+var winningMoves = [0, 1, 2, 3];
+winningMoves.forEach(function(col) {
+  won = Connect4.play(col, won);
+  if (col !== 3)
+    won = Connect4.play(col, won);
+});
+
 test('When there is a 4 in line, game is over, and a winner is set', function(t) {
-  var g = started;
-  var moves = [0, 1, 2, 3];
-  moves.forEach(function(col) {
-    g = Connect4.play(col, g);
-    if (col !== 3)
-      g = Connect4.play(col, g);
-  });
+  var g = won;
   t.equal(g.state, Connect4.States.GAMEOVER);
   t.equal(g.winner, Connect4.States.BLUE);
   t.equal(typeof g.line, "object");
@@ -87,5 +89,11 @@ test('Current player returns the name of the current player', function(t) {
   t.equal(Connect4.currentPlayer(p), 'Mary');
   var p2 = Connect4.play(0, p);
   t.equal(Connect4.currentPlayer(p2), 'John');
+  t.end();
+});
+
+test('Winner and looser returns the name of the winner and looser player', function(t) {
+  t.equal(Connect4.winner(won), 'John');
+  t.equal(Connect4.looser(won), 'Mary');
   t.end();
 });

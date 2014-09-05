@@ -1,7 +1,11 @@
 var clone = require('../utils/clone');
 
-// Creates a board of `size`
-// The cells are a vector of vectors
+// Board module. Manages the board and its functionality.
+// Returns a constructor function as exports, and functions to operate on that
+// data structure as exports.fn
+
+// Creates a board of `size`. The cells are a vector of vectors.
+// Initializes the board with empty chips.
 var Board = module.exports = function(size) {
   var cells = [];
   for (var i = 0; i<size; i++) {
@@ -15,23 +19,27 @@ var Board = module.exports = function(size) {
   }
 };
 
+// Types of chips for the board, constants.
 Board.Chips = {
   EMPTY: ' ',
   BLUE: 'O',
   RED: 'X'
 };
 
-
+// Get a specific cell on the board
 Board.get = function(row, col, b) {
   return b.cells[row][col];
 };
 
+// Set a specific cell on the board
 Board.set = function(row, col, val, b) {
   var nb = clone(b);
   nb.cells[row][col] = val;
   return nb;
 };
 
+// Put a chip on a column. This is the main function used in the game logic
+// when playing. Just receives the col and figures out the row.
 Board.put = function(col, val, b) {
   var nb = clone(b);
   for (var i = 0; i < nb.size; i++) {
@@ -44,6 +52,7 @@ Board.put = function(col, val, b) {
   throw new Error('Column', col, 'is full in board', b);
 };
 
+// Predicate function, true if the board is full, false if it is not
 Board.isFull = function(board) {
   var i, j, row;
   for (i = 0; i < board.size; i++)
@@ -62,8 +71,8 @@ function shouldCheck(board) {
 
 // Detects 4 in line in a board.
 // Returns null if there is none.
-// Returns { how: TYPE, where: [ROW, COL] } when it finds one
-// Pretty hairy code, but well tested.
+// Returns { how: TYPE, where: [ROW, COL] } when it finds one.
+// Pretty hairy code, but well tested and commented.
 Board.hasFourInline = function(board) {
 
   // Check idx will be used to see if we should try and find 4 in line on

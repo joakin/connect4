@@ -1,4 +1,10 @@
 
+//
+// This is a test js to see how to interact with the game logic.
+// Kind of like a terminal version of a played game. Used to drive the game
+// logic design and initial coding
+//
+
 console.log('Hi! Welcome to connect4');
 
 var Connect4 = require('./game');

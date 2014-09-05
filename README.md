@@ -2,9 +2,11 @@
 CONNECT 4
 =========
 
-Web connect4 game.
+Simple web connect4 game. 2 players playing on the same screen.
 
 Developed using npm and browserify for modules.
+
+Tested on latest FF, Chrome, Mobile FF, Mobile Chrome.
 
 ### Deps
 

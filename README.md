@@ -97,10 +97,14 @@ Things I want to do (whatever happens):
 * [ ] UI tests
 * [ ] Fix mobile css (now with the zoom when using the keyboard it is funky
   when starting the game)
+* [ ] Try multiple instances of games in the same site (should work).
 
 Awesome things to do (less important):
 * [ ] Undo redo (it already works with immutable data structures, so it should
   be easy)
 * [ ] Better design and styles (it is extra simple now)
 * [ ] CSS transitions for a better GUI
+* [ ] Extract the game logic to its own package
+* [ ] Extract the game UI to its own package
+
 

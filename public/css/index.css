@@ -26,3 +26,14 @@ html { box-sizing: border-box; }
   text-decoration: underline;
 }
 
+.game-over {
+  position: absolute;
+  top: 0%;
+  left: 50%;
+  width: 500px;
+  margin-left: -250px;
+  background-color: rgba(255,255,255,0.7);
+  height: 100%;
+  padding-top: 200px;
+}
+

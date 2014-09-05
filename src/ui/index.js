@@ -49,7 +49,6 @@ function userPlays(row, col, ui) {
 }
 
 function gameFinished(ui) {
-  cleanScreen(ui);
   ui.views.gameOver = GameOver.init(ui, restart);
 }
 

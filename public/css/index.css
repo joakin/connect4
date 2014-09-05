@@ -2,9 +2,13 @@
 html { box-sizing: border-box; }
 *, *:before, *:after { box-sizing: inherit; }
 
+html, body { font-family: sans-serif; }
+
 #connect4 {}
 
 .game { text-align: center; position: relative; }
+
+.welcome { margin-top: 200px; }
 
 .board { height: 500px; width: 500px; margin: 10px auto; overflow: hidden; }
 

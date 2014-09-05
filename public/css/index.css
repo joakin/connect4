@@ -2,7 +2,9 @@
 html { box-sizing: border-box; }
 *, *:before, *:after { box-sizing: inherit; }
 
-.board { height: 500px; width: 500px; margin: 10px; overflow: hidden; }
+#connect4 { text-align: center; }
+
+.board { height: 500px; width: 500px; margin: 10px auto; overflow: hidden; }
 
 .cell {
   height: 14.28%;
@@ -13,5 +15,12 @@ html { box-sizing: border-box; }
   line-height: 69px;
   font-family: courier;
   text-align: center;
+}
+
+.turn>span {
+  display: inline-block;
+  font-weight: bold;
+  font-size: 20px;
+  text-decoration: underline;
 }
 

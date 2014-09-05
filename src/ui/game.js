@@ -48,6 +48,7 @@ function cellToDom(cellDom, row, cell, col) {
 }
 
 Game.drawTurn = function(screen, ui) {
+  screen.name.textContent = ui.game.players[ui.game.state.toLowerCase()];
 };
 
 Game.render = function(screen, ui) {

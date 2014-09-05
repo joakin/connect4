@@ -24,8 +24,11 @@
     "watch-js": "watchify src/index.js -o public/js/bundle.js --debug --verbose",
     "build-js": "browserify src/index.js -o public/js/bundle.js",
     "dist-js": "browserify src/index.js | uglifyjs > dist/js/bundle.js",
+    "test-js": "browserify test/*.js > public/test-bundle.js",
+
     "watch": "npm run watch-js",
     "build": "npm run build-js",
+
     "dist": "cp -R public dist && npm run dist-js",
     "watch-test": "./node_modules/.bin/watch-run -p \"{src,test}/**/*.js\" npm test",
     "test": "browserify test/*.js | testling"

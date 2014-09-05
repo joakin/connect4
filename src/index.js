@@ -1,3 +1,4 @@
 
-var Connect4 = require('./game');
+var UI = require('./ui');
 
+UI.init('connect4');

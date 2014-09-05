@@ -55,6 +55,7 @@ function gameFinished(ui) {
 
 function restart(ui) {
   cleanScreen(ui);
+  ui.events.off();
   exports.init(ui.id);
 }
 

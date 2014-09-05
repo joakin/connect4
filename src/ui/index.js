@@ -28,7 +28,6 @@ exports.init = function(id) {
 }
 
 function startGame(blue, red, ui) {
-
   try {
     ui.game = Connect4.start(blue, red, ui.game);
   } catch (e) {
@@ -36,10 +35,15 @@ function startGame(blue, red, ui) {
   }
 
   cleanScreen(ui);
-  Game.init(ui);
+
+  Game.init(ui, userPlays);
 }
 
 function cleanScreen(ui) {
   ui.dom.innerHTML = '';
+}
+
+function userPlays(row, col, ui) {
+  console.log('user: ', ui.game.state, 'plays col', col);
 }
 

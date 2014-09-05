@@ -52,29 +52,79 @@ Board.isFull = function(board) {
   return true;
 };
 
+// Returns a function that given an index will tell you if you should check it
+// for 4 in line depending on the board size.
+function shouldCheck(board) {
+  return function(idx) {
+    return idx <= board.size - 4;
+  };
+}
+
+// Detects 4 in line in a board.
+// Returns null if there is none.
+// Returns { how: TYPE, where: [ROW, COL] } when it finds one
+// Pretty hairy code, but well tested.
 Board.hasFourInline = function(board) {
-  for (var rowIdx = 0; rowIdx <= board.size - 4; rowIdx++) {
+
+  // Check idx will be used to see if we should try and find 4 in line on
+  // a particular index (if it would fit from that index to the board size)
+  var checkIdx = shouldCheck(board);
+
+  for (var rowIdx = 0; rowIdx < 7; rowIdx++) {
     var row = board.cells[rowIdx];
-    for (var colIdx = 0; colIdx <= board.size - 4; colIdx++) {
+    for (var colIdx = 0; colIdx < 7; colIdx++) {
 
-      var val = row[colIdx];
-      var diagval = board.cells[rowIdx+3][colIdx];
-      var canBe = true && val !== Board.Chips.EMPTY;
-      var diagCanBe = true && diagval !== Board.Chips.EMPTY;
+      // We are going to go through every cell in the board, and will try to
+      // find 4 different types of 4 in line from the initial cell.
+      var currentChip = row[colIdx];
+      // For the downwards diagonal we will check from 4 up of the current cell
+      // to 4 right of the current cell.
+      var iniDownDiag =  checkIdx(rowIdx+3) && board.cells[rowIdx+3][colIdx];
 
-      var horizontal = canBe;
-      var vertical   = canBe;
-      var updiag     = canBe;
-      var downdiag   = diagCanBe;
+      // We are going to calculate the initial values of the booleans we will
+      // use to see if there was 4 in line that particular way.
 
-      if (canBe || diagCanBe) {
+      // Valid initial cells should not be EMPTY. If empty no 4 in line
+      var valValid = true && currentChip !== Board.Chips.EMPTY;
+      var downDiagValid = true && iniDownDiag !== Board.Chips.EMPTY;
+
+      // These are the initial values for the different types of 4 in line.
+      // For each type of diagonal, the initial value will be if it is possible
+      // to have 4 in line there (won't go out of bounds when searching, and
+      // the cell has a valid player chip on it)
+      var canBeHorizontal = valValid      && checkIdx(colIdx);
+      var canBeVertical   = valValid      && checkIdx(rowIdx);
+      var canBeUpDiag     = valValid      && checkIdx(rowIdx)  && checkIdx(colIdx);
+      var canBeDownDiag   = downDiagValid && checkIdx(rowIdx)  && checkIdx(colIdx);
+
+      var horizontal = canBeHorizontal;
+      var vertical   = canBeVertical;
+      var updiag     = canBeUpDiag;
+      var downdiag   = canBeDownDiag;
+
+      // When there exists the possibility of any 4 in line, go check
+      if (canBeHorizontal || canBeVertical || canBeUpDiag || canBeDownDiag) {
+
+        // Lets go through the other 3 cells for each kind of 4 in line and see
+        // if they match. We will shortcircuit to false as soon as possible.
         for (var k = 1; k < 4; k++) {
-          horizontal = horizontal && val === row[colIdx+k];
-          vertical   = vertical   && val === board.cells[rowIdx+k][colIdx];
-          updiag     = updiag     && val === board.cells[rowIdx+k][colIdx+k];
-          downdiag   = downdiag   && diagval === board.cells[rowIdx+3-k][colIdx+k];
+
+          // For horizontal, we check to the right
+          horizontal = horizontal && currentChip === row[colIdx+k];
+
+          // For vertical, we check to the upwards maintaining column
+          vertical = vertical && currentChip === board.cells[rowIdx+k][colIdx];
+
+          // For upwards diagonal, we check right and up
+          updiag = updiag && currentChip === board.cells[rowIdx+k][colIdx+k];
+
+          // For downwards diagonal, we go from up-left to bottom-right
+          downdiag = downdiag && iniDownDiag === board.cells[rowIdx+3-k][colIdx+k];
         }
 
+        // When done checking, we save the position, and see if any of the 4 in
+        // lines has matched (true), and return the 4 inline and exit the
+        // function
         var how = null;
         var where = [rowIdx, colIdx];
         if (horizontal) how = 'HORIZONTAL';

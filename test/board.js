@@ -58,10 +58,12 @@ test('Can detect a horizontal 4 in line', function(t) {
 });
 
 test('Can detect a vertical 4 in line', function(t) {
-  var b = Board(7);
-  for(var col = 0; col < 4; col++)
-    b = Board.put(0, Board.Chips.BLUE, b);
-  t.deepEqual(Board.hasFourInline(b), { how: 'VERTICAL', where: [0, 0] });
+  for (var i = 0; i < 7; i++) {
+    var b = Board(7);
+    for(var chips = 0; chips < 4; chips++)
+      b = Board.put(i, Board.Chips.BLUE, b);
+    t.deepEqual(Board.hasFourInline(b), { how: 'VERTICAL', where: [0, i] });
+  }
   t.end();
 });
 

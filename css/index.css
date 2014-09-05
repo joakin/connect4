@@ -1,0 +1,28 @@
+
+html { box-sizing: border-box; }
+*, *:before, *:after { box-sizing: inherit; }
+
+#connect4 {}
+
+.game { text-align: center; position: relative; }
+
+.board { height: 500px; width: 500px; margin: 10px auto; overflow: hidden; }
+
+.cell {
+  height: 14.28%;
+  width: 14.28%;
+  float: left;
+  border: 1px solid #ddd;
+  font-size: 58px;
+  line-height: 69px;
+  font-family: courier;
+  text-align: center;
+}
+
+.turn>span {
+  display: inline-block;
+  font-weight: bold;
+  font-size: 20px;
+  text-decoration: underline;
+}
+

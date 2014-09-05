@@ -81,3 +81,7 @@ exports.print = function(g) {
   );
   console.log(g);
 };
+
+exports.currentPlayer = function(game) {
+  return game.players[game.state.toLowerCase()];
+};

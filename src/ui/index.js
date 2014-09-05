@@ -46,6 +46,12 @@ function startGame(blue, red, ui) {
 function userPlays(row, col, ui) {
   ui.game = Connect4.play(col, ui.game);
   Game.render(ui.views.game, ui);
+  if (ui.game.state === Connect4.states.GAMEOVER)
+    gameFinished(ui);
+}
+
+function gameFinished(ui) {
+  // ui.dom.innerHTML = '
 }
 
 function cleanScreen(ui) {

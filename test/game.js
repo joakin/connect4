@@ -79,3 +79,13 @@ test('When there is a 4 in line, game is over, and a winner is set', function(t)
   t.end();
 });
 
+
+
+test('Current player returns the name of the current player', function(t) {
+  t.equal(Connect4.currentPlayer(started), 'John');
+  var p = Connect4.play(0, started);
+  t.equal(Connect4.currentPlayer(p), 'Mary');
+  var p2 = Connect4.play(0, p);
+  t.equal(Connect4.currentPlayer(p2), 'John');
+  t.end();
+});
